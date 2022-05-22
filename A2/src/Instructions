@@ -1,0 +1,26 @@
+1. Add to your library support for TV shows, which are composed of episodes. Each episode corresponds to a specific file
+path and can capture custom information, similarly to movies. It should be possible to identify an episode by its
+sequential number.
+something that can be watched (e.g., a movie, an episode, a whole TV show)
+something that can be binged (watchlists and TV shows)
+
+//TODO: Adding extra attribute in the Movie and Episode class for Next and Previous?
+//Should I add them at construction time? what if the client doesn't provide the next and Previous?
+
+//TODO: Check generic interface style in Bendable and Sequential
+Then, use interfaces to support multiple implementations of the following domain concepts:
+something that can be preceded or followed by related elements (movies can have sequels and episodes are in a sequence)
+
+Add relevant methods to your interfaces to show how they differ, and design your interfaces carefully using the Interface
+Segregation Principle. [5 points]
+
+2. Provide a way to obtain to access the elements in any bingeable object, using good design principles. Keep the
+solution as general as possible. [5 points]
+
+3. Add a watchlist generation feature to your Library class. This feature allows client code to automatically generate
+watchlists based on algorithms specified by the client.
+For example, a client may want to include create a watchlist of all English movies from a set of studios, or ten random
+episodes from a TV show.
+To illustrate your design, use this feature to generate two different watchlists in your Driver code. [5 points]
+//TODO: Figure out the generics of the gereate method in Library
+//TODO: write driver

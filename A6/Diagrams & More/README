@@ -1,0 +1,49 @@
+
+I have tried to use a combination of design patterns mentioned in class in this project in a way to optimize the functionality.
+
+Brief summery of my design:
+1. Action: an abstract class that every class that wants to represent an action should extend.
+The executeANDlog() method logs every action after it is executed by calling the log() method of the Logger class.
+Clients will be allowed to execute a single Action on their Robot with out it being in a Program.
+
+2. BasicAction: an abstract class that extends Action that every basic action should extend.
+The executeAction() method does the battery check and updates the battery level for the BasicActions.
+If any of the prerequisites for a robot move is not satisfied when preforming an action a IllegalRobotStateException will be thrown.
+
+3. The BasicAction classes: there are 6 final classes that represent basic action which are the building blocks
+of all the actions the client can do. Used flyweight and singleton.
+
+4. ComplexAction: Action that is a combination of other Actions.
+
+5. CriticalActionDecorator: Decorator class that forces full battery recharge before execution of the action.
+
+6. LoggingStrategy: interface for strategy design pattern used by the logger class, the clients
+can implement a new loggingStrategy and use setStrategy in the Logger class to use the new Strategy for logging.
+I have provided a default strategy.
+
+7. Logger: static class that holds a loggingStrategy and used by the Action class that logs every Action that is called.
+
+8. CalculationVisitor: interface for the visitor design pattern that provides a way to do calculations for every basic Action.
+Clients can implement the interface if they want to do new calculations.
+I have provided two calculation visitors as example.
+It was a bit tricky to figure this question out but I think the visitor pattern where we have a visit for every BasicAction is the best way to go.
+In the Program class and ComplexAction that include many BasicActions I just accumulate the result of each of visiting every BasicActions and return that.
+
+
+I have tried to provide comments and JavaDoc for all the classes.
+
+Unit Test:
+For the Unit Tests I tried my best to write sufficient, complete, and proper tests.
+However, we hardly spent 2 lectures on unit testing we haven't learned every thing about testing in the class.
+I tried to do my best in writing the tests by using the book and google, but I'm sure the tests still could be better.
+Given the complexity of testing and the limited time that we had for the assignment, I hope you can be less strict on the grading of the tests.
+Note for some of the classes the Branch coverage might be low, that is mostly because IntelliJ counts asserts as a branch and I didn't know how to test assert statements.
+
+In the state diagram I haven't added a state for a 0 battery level since by the WallE code the battery level can be negative.
+
+Please Note:
+I completed the Project while I was sick with Covid and had a bunch of other final projects due, I still tried my best.
+Given that the weight of this Assignment is so high, I hope you can be lenient on the grading.
+
+Best,
+Namdar

@@ -1,0 +1,42 @@
+I have first made an Episode class that represent one episode, it hold a file path and an episode number,
+an episode can also have custom info. Having a episode number will add a bit of extra work when creating
+an Episode object, but I believe it's a good tradeoff since the episode number can be used in many places
+(e.g. ordering the episodes of a Show).
+The Episode class implements three interfaces:
+1. Comparable: compareTo method orders the episodes in increasing order using the episode number.
+2. Watchable
+3. Sequential: for the Sequential interface I decided to add two extra fields eNext and ePrevious
+to store the next and the previous values that are required by the Sequential Interface methods.
+I couldn't find a better way to keep track of the order of the episodes in the episode class.
+In the TvShow class on the other hand I am using the episode number to get the ordering of the episodes.
+
+I have also created a TvShow class that has a title and stores an array list of episodes.
+The list is always kept sorted by increasing order of episode numbers.
+The TvShow Class implements two interfaces:
+1. Watchable: The method Watch plays the first episode of the TvShow
+2. Bingeable: bingeWatch is an overloaded method that allows you to either watch the TvShow from the first episode to the
+last episode or from a given episode for a number of given number of episodes.
+
+I have also added a set in the Library class that stores TvShow, and a method to add TvShows to the set.
+
+For the Interfaces,
+Watchable: it has three methods watch, isValid, and getInfo. These are common to all the Watchable class.
+Bingeable: bingeWatch() is an over loaded method with two instances, the implementor has to give the option to either
+watch from the start of a Bingeable object or from a given place for a given number of object on.
+To provide a way to obtain to access the elements in any bingeable object, the Bingeable interface extends Iterable.
+Sequential: for any object that can come in a sequence you should be able to set and get the next and previous values.
+Each class can store the next and previous values independently and this creates something like a doubly linked list.
+
+WatchList generation:
+I have used the Strategy Pattern here:
+I have created a interface Script that is implemented by two classes movieScript and episodeScript, each of these classes
+give the client the options to specify what movies/episodes they want and create an algorithm for my Generator method to use.
+So for example, if a client wants a set of movies, they should first create an object of the movieScript and set the values they
+want the movies to have (check the movieScript class for more info). And they have to make a episodeScript for generating
+episodes. I have created a method generate in the Library class that takes in a Script object, this object can be either an
+episodeScript of movieScript or any other script type provided later. Since the assignment handout has method that we have
+to be able to generate both movies and episodes I have decided not to generate a watch list (since it only takes movie and
+doesn't work with episodes) and return an ArrayList of Watchable instead. The generate method calls private classes each
+made to filter the movies/episodes based on the script type provided. So for example after the client has created a
+script object they can generate(script) and they will get an ArrayList<Watchable> with the elements that matches their
+algorithm. The ArrayList will contain Movies for a movieScript and Episodes for an episodeScript.
